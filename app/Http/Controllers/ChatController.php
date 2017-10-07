@@ -55,7 +55,8 @@ class ChatController extends Controller {
     	}
     	return view('chatroom', [
     		'user' => Auth::user(),
-    		'receiver' => User::find($receiver_id)
+    		'receiver' => User::find($receiver_id),
+    		'chats' => Chat::whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get()
     	]);
     }
 }

@@ -10,31 +10,19 @@
             </div>
 
             <ul class="nav">
-                <li class="text-center">
-                    <a href="#">
-                        <p>Naman</p>
-                    </a>
-                </li>
-                <li class="text-center">
-                    <a href="#">
-                        <p>Chetan</p>
-                    </a>
-                </li>
-                <li class="text-center">
-                    <a href="#">
-                        <p>Bharvi</p>
-                    </a>
-                </li>
-                <li class="text-center">
-                    <a href="#">
-                        <p>Harsheen</p>
-                    </a>
-                </li>
-                <li class="text-center">
-                    <a href="#">
-                        <p>Anubhav</p>
-                    </a>
-                </li>
+                @foreach($chats as $chat)
+                    <li class="text-center">
+                        <a href="chat/{{$chat->id}}">
+                            @if($chat->type == 'personal')
+                                @if(App\PersonalChat::find($chat->c_id)->user_id_1 == Auth::user()->id)
+                                    <p>{{ App\User::find(App\PersonalChat::find($chat->c_id)->user_id_2)->name }}</p>
+                                @else
+                                    <p>{{ App\User::find(App\PersonalChat::find($chat->c_id)->user_id_1)->name }}</p>
+                                @endif
+                            @endif    
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
