@@ -76,3 +76,13 @@
 .right {
 	float: right;
 }
+
+footer {
+	z-index: 3;
+	position: fixed !important;
+    right: 0;
+    bottom: 0;
+    width: inherit;
+    height: 60px;
+    background-color: #ddd;
+}

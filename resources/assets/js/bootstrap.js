@@ -46,10 +46,11 @@ if (token) {
 import Echo from "laravel-echo";
 
 window.Pusher = require('pusher-js');
+Pusher.logToConsole = true;
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: Laravel.pusherKey,
-    cluster: Laravel.pusherCluster,
+    key: 'f3902274d99c7822c337',
+    cluster: 'ap2',
     encrypted: true
 });
