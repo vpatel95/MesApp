@@ -141,9 +141,9 @@
                 console.log(e);
                 console.log('{{ Auth::user()->id }}')
                 if(e.user == {{ Auth::user()->id }}) {
-                    $('#chat_content').append('<div class="row"><div class="col-sm-8 right"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ Auth::user()->name }}</div><hr /></div><div class="row"><div class="col-xs-5"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')
+                    $('#chat_content').append('<div class="row"><div class="col-sm-8 right"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ Auth::user()->name }}</div><hr /></div><div class="row"><div class="col-xs-12"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')
                 } else {
-                    $('#chat_content').append('<div class="row"><div class="col-sm-8 left"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ $receiver->name }}</div><hr /></div><div class="row"><div class="col-xs-5"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')     
+                    $('#chat_content').append('<div class="row"><div class="col-sm-8 left"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ $receiver->name }}</div><hr /></div><div class="row"><div class="col-xs-12"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')     
                 }
             });
     </script>
