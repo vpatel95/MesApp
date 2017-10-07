@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Chat;
+use App\PersonalChat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'users' => User::get()->all(),
+            'chats' => Chat::whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get()
+        ]);
     }
 }
+

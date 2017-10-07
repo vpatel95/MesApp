@@ -17,4 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [
+	'uses' => 'HomeController@index',
+	'as' => 'home'
+]);
+
+Route::get('/newchat/{id}', [
+	'uses' => 'ChatController@newchat',
+	'as' => 'newchat'
+]);
+
+Route::get('/chat/{id}', [
+	'uses' => 'ChatController@chat',
+	'as' => 'chat'
+]);
+
