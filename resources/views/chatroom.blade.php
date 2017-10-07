@@ -4,7 +4,7 @@
     <div class="sidebar" data-background-color="black" data-active-color="danger">
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="{{ route('home') }}" class="simple-text">
                     Chats
                 </a>
             </div>
@@ -12,7 +12,7 @@
             <ul class="nav">
                 @foreach($chats as $chat)
                     <li class="text-center">
-                        <a href="chat/{{$chat->id}}">
+                        <a href="{{$chat->id}}">
                             @if($chat->type == 'personal')
                                 @if(App\PersonalChat::find($chat->c_id)->user_id_1 == Auth::user()->id)
                                     <p>{{ App\User::find(App\PersonalChat::find($chat->c_id)->user_id_2)->name }}</p>
@@ -141,7 +141,7 @@
                 console.log(e);
                 console.log('{{ Auth::user()->id }}')
                 if(e.user == {{ Auth::user()->id }}) {
-                    $('#chat_content').append('<div class="row"><div class="col-sm-8 right"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ App\User::find($message->user_id)->name }}</div><hr /></div><div class="row"><div class="col-xs-5"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')
+                    $('#chat_content').append('<div class="row"><div class="col-sm-8 right"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ Auth::user()->name }}</div><hr /></div><div class="row"><div class="col-xs-5"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')
                 } else {
                     $('#chat_content').append('<div class="row"><div class="col-sm-8 left"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ $receiver->name }}</div><hr /></div><div class="row"><div class="col-xs-5"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>')     
                 }
