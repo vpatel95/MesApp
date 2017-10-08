@@ -30,23 +30,36 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="card">
                             <div class="header">
-                                <h3 class="title">All Registered users</h3>
+                                <div class="form-group">
+                                    <label>Enter Group Name</label>
+                                    <input type="text" class="form-control border-input" placeholder="Group Name" value="">
+                                </div>
                                 <hr>
                             </div>
                             <div class="content">
-                                @foreach($users as $user)
-                                    @if($user->id == Auth::user()->id)
-                                        @continue
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-xs-10 col-md-9">
-                                            <h4><a href="newchat/{{$user->id}}">{{ $user->name }}</a></h4><br>
+                                <form>
+                                    @foreach($users as $user)
+                                        @if($user->id == Auth::user()->id)
+                                            @continue
+                                        @endif
+                                        <div class="row">
+                                            <div class="col-xs-10 col-md-9">
+                                                <h4><a href="newchat/{{$user->id}}">{{ $user->name }}</a></h4><br>
+                                            </div>
+                                            <div class="col-xs-2 col-md-3">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="group_member[]" value="{{ $user->id }}">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-xs-2 col-md-3">
-                                        
-                                        </div>
+                                    @endforeach
+                                    <div class="footer">
+                                        <hr>
+                                        <div class="text-center">
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Create Group</button>
                                     </div>
-                                @endforeach
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -64,10 +77,10 @@
     <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
 @endpush
 
-@push('scripts')
     <script src="{{ asset('js/bootstrap-checkbox-radio.js') }}"></script>
+@push('scripts')
     <script src="{{ asset('js/chartist.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-notify.js') }}"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="{{ asset('js/paper-dashboard.js') }}"></script>
+    <!-- <script src="{{ asset('js/demo.js') }}"></script> -->
 @endpush
