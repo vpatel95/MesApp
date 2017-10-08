@@ -5,6 +5,8 @@ namespace App\Events;
 use App\User;
 use App\Message;
 use App\Chat;
+use App\PersonalChat;
+use App\GroupChat;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;

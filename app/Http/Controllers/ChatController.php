@@ -47,12 +47,15 @@ class ChatController extends Controller {
     public function chat($id) {
     	$chat = Chat::find($id);
     	if($chat->type == 'personal'){
+    		$pc = PersonalChat::find($chat->c_id);
     		$id1 = PersonalChat::find($chat->c_id)->user_id_1;
     		$id2 = PersonalChat::find($chat->c_id)->user_id_2;
     		if($id1 == Auth::user()->id)
     			$receiver_id = $id2;
-    		else
+    		elseif($id2 == Auth::user()->id)
     			$receiver_id = $id1;
+    		else
+    			return redirect()->back();
     	}
     	return view('chatroom', [
     		'messages' => Message::where('chat_id',$chat->id)->get(),
@@ -89,6 +92,6 @@ class ChatController extends Controller {
     }
 
     public function getUsers(Request $request) {
-    	
+
     }
 }
