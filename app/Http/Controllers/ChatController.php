@@ -10,6 +10,7 @@ use App\GroupMember;
 use App\Chat;
 use App\Events\MessageSent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller {
@@ -42,9 +43,9 @@ class ChatController extends Controller {
     }
 
     public function chat($id) {
-    	$pc = Chat::whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get();
-        $gc = Chat::whereIn('c_id',GroupMember::where('user_id',Auth::user()->id)->pluck('group_chat_id')->toArray())->get();
-        
+    	$pchat = Chat::whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get();
+        $gchat = Chat::whereIn('c_id',GroupMember::where('user_id',Auth::user()->id)->pluck('group_chat_id')->toArray())->get();
+
     	$chat = Chat::find($id);
     	if($chat->type == 'personal'){
     		$pc = PersonalChat::find($chat->c_id);
@@ -61,7 +62,7 @@ class ChatController extends Controller {
 	    		'messages' => Message::where('chat_id',$chat->id)->get(),
 	    		'user' => Auth::user(),
 	    		'receiver' => User::find($receiver_id),
-	    		'chats' => ($pc->merge($gc))->sortBy('created_at'),
+	    		'chats' => ($pchat->merge($gchat))->sortBy('created_at'),
 	    		'chat_details' => $chat
 	    	]);
 	    }else {
