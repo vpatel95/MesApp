@@ -1,11 +1,13 @@
 @extends('layouts.chat')
 
+@section('nav-heading', $receiver->name)
+
 @section('chat-list')
     <div class="sidebar" data-background-color="black" data-active-color="danger">
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="{{ route('home') }}" class="simple-text">
-                    Chats
+                    <i class="ti-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
                 </a>
             </div>
 
@@ -41,7 +43,7 @@
                                         <div class="stats">
                                             {{ Auth::user()->name }}
                                         </div>
-                                        <hr />
+                                        <hr/>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -63,10 +65,10 @@
                                         <div class="stats">
                                             {{ App\User::find($message->user_id)->name }}
                                         </div>
-                                        <hr />
+                                        <hr/>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-5">
+                                        <div class="col-xs-12">
                                             <div>
                                                 <p>{{ $message->message }}</p>
                                             </div>

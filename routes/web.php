@@ -36,3 +36,13 @@ Route::post('/sendMessage', [
 	'uses' => 'ChatController@sendMessage',
 	'as' => 'send.message'
 ]);
+
+Route::post('getchats', [
+	'uses' => 'ChatController@getChats',
+	'as' => 'getchats'
+]);
+
+Route::post('getusers', [
+	'uses' => 'ChatController@getUsers',
+	'as' => 'getusers'
+]);

@@ -27,19 +27,19 @@
                             <span class="sr-only">Toggle navigation</span>
                             <span>Chats</span>
                         </button>
-                        <a class="navbar-brand" href="#">{{ $receiver->name }}</a>
+                        <a class="navbar-brand" href="#">@yield('nav-heading')</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-panel"></i>
-                                    <p>{{ Auth::user()->name }}</p>
+                                <a href="{{ route('home') }}" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-home"></i>
+                                    <p>Home</p>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    <i class="ti-settings"></i>
+                                    <i class="ti-close"></i>
                                     <p>Logout</p>
                                 </a>
 

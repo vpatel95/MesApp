@@ -83,4 +83,12 @@ class ChatController extends Controller {
     		'status' => 'success'
     	];
     }
+
+    public function getChats(Request $request) {
+
+    }
+
+    public function getUsers(Request $request) {
+    	
+    }
 }
