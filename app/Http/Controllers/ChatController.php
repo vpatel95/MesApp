@@ -82,7 +82,7 @@ class ChatController extends Controller {
     }
 
     public function sendMessage(Request $request) {
-    	$message = $request['message'];
+    	$message = htmlspecialchars($request['message']);
     	$chat_id = $request['chat_id'];
     	$user_id = Auth::user()->id;
 
