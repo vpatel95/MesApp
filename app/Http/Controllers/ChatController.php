@@ -92,7 +92,7 @@ class ChatController extends Controller {
     	$m->chat_id = $chat_id;
     	$m->save();
 
-    	broadcast(new MessageSent($user_id, $message, $chat_id));
+    	broadcast(new MessageSent($user_id, $message, $chat_id, User::find($user_id)->name));
 
     	return [
     		'message' => $message,
