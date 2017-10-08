@@ -859,11 +859,10 @@ if (token) {
 
 
 window.Pusher = __webpack_require__(36);
-Pusher.logToConsole = true;
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
-  key: 'f3902274d99c7822c337',
+  key: '8b27e0f60a98b5c10586',
   cluster: 'ap2',
   encrypted: true
 });
