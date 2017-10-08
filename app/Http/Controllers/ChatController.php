@@ -86,6 +86,10 @@ class ChatController extends Controller {
     	$chat_id = $request['chat_id'];
     	$user_id = Auth::user()->id;
 
+        $this->validate($request, [
+            'message' => 'required',
+        ]);
+
     	$m = new Message;
     	$m->message = $message;
     	$m->user_id = $user_id;

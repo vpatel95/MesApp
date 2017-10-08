@@ -65,6 +65,7 @@
             if($(window).width()<768){
                 window.location.href="/warning";
             }
+            $('.main-panel').scrollTop($('.main-panel')[0].scrollHeight);
         });
     </script>
     
