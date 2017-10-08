@@ -77,7 +77,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if($(window).width()<768){
+                window.location.href="/warning";
+            }
+        });
+    </script>
 
     @stack('scripts')
 </body>
+
 </html>

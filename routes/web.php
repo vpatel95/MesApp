@@ -46,3 +46,7 @@ Route::post('create/group', [
 	'uses' => 'ChatController@createGroup',
 	'as' => 'create.group'
 ]);
+
+Route::get('warning', function() {
+	return view('warning');
+})->name('warning');
