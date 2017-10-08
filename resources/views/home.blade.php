@@ -59,7 +59,9 @@
                                                 @else
                                                     {{ App\User::find(App\PersonalChat::find($chat->c_id)->user_id_1)->name }}
                                                 @endif
-                                            @endif    
+                                            @elseif($chat->type == 'group')
+                                                    {{ App\GroupChat::find($chat->c_id)->name }}
+                                            @endif  
                                         </a>
                                     </h4><br>
                                 @endforeach
