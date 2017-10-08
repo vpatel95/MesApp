@@ -13,7 +13,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="#">
+                    <a href="{{ route('groups') }}">
                         <i class="ti-user"></i>
                         <p>Create Group</p>
                     </a>

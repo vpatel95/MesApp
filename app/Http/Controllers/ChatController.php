@@ -87,11 +87,8 @@ class ChatController extends Controller {
     	];
     }
 
-    public function getChats(Request $request) {
+    public function createGroups(Request $request) {
 
     }
 
-    public function getUsers(Request $request) {
-
-    }
 }

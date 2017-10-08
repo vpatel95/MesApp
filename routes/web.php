@@ -37,12 +37,12 @@ Route::post('/sendMessage', [
 	'as' => 'send.message'
 ]);
 
-Route::post('getchats', [
-	'uses' => 'ChatController@getChats',
-	'as' => 'getchats'
+Route::get('create/group', [
+	'uses' => 'HomeController@group',
+	'as' => 'groups'
 ]);
 
-Route::post('getusers', [
-	'uses' => 'ChatController@getUsers',
-	'as' => 'getusers'
+Route::post('create/group', [
+	'uses' => 'ChatController@createGroup',
+	'as' => 'create.group'
 ]);

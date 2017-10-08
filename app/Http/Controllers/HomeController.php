@@ -25,11 +25,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('home', [
             'users' => User::get()->all(),
             'chats' => Chat::whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get()
+        ]);
+    }
+
+
+    public function group() {
+        return view('group', [
+            'users' => User::get()->all(),
         ]);
     }
 }
