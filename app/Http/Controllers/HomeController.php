@@ -33,7 +33,6 @@ class HomeController extends Controller
         $pc = Chat::where('type','personal')->whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get();
         $gc = Chat::where('type','group')->whereIn('c_id',GroupMember::where('user_id',Auth::user()->id)->pluck('group_chat_id')->toArray())->get();
 
-        return ($pc->merge($gc))->sortBy('created_at');
         return view('home', [
             'users' => User::get()->all(),
             'chats' => ($pc->merge($gc))->sortBy('created_at')
