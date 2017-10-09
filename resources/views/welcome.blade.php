@@ -62,6 +62,16 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .warning {
+                border-radius: 10px;
+                margin-top: 100px;
+                padding: 15px;
+                font-size: 20px;
+                color: #000;
+                font-weight: 600;
+                background-color: #ff9933;
+            }
         </style>
     </head>
     <body>
@@ -84,6 +94,9 @@
 
                 <div class="links">
                     <p>A world-class web messaging application</p>
+                </div>
+                <div class="warning">
+                    <p>Due to some unavoidable reasons the VPS had to be changed. Please register again. Sorry for the inconvenience.</p>
                 </div>
             </div>
         </div>
