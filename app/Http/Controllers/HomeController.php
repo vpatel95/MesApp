@@ -9,6 +9,7 @@ use App\GroupChat;
 use App\GroupMember;
 use App\Chat;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,4 +46,5 @@ class HomeController extends Controller
             'users' => User::get()->all(),
         ]);
     }
+
 }

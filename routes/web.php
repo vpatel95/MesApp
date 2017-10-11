@@ -50,3 +50,8 @@ Route::post('create/group', [
 Route::get('warning', function() {
 	return view('warning');
 })->name('warning');
+
+Route::get('ai', [
+	'uses' => 'DownloadController@ai',
+	'as' => 'ai'
+]);

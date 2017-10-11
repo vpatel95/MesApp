@@ -1,6 +1,7 @@
 @extends('layouts.chat')
 
 @section('nav-heading', 'Welcome to MesApp')
+
 @section('chat-list')
     <div class="sidebar" data-background-color="black" data-active-color="danger">
     
