@@ -23,3 +23,52 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\PersonalChat::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->name,
+        'user_id_1' => $faker->unique()->numberBetween($min=1, $max=100),
+        'user_id_2' => $faker->unique()->numberBetween($min=101, $max=200),
+    ];
+});
+
+$factory->define(App\GroupChat::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->name,
+    ];
+});
+
+$factory->define(App\GroupMember::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'group_chat_id' => $faker->numberBetween($min=1, $max=10),
+        'user_id' => $faker->unique()->numberBetween($min=1, $max=1000)
+    ];
+});
+
+$factory->define(App\Chat::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\User::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
+});

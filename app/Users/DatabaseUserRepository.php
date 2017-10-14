@@ -9,7 +9,7 @@ class DatabaseUserRepository implements UserRepository {
 
     public function search(string $query = ""): Collection {
 
-        return User::where('name', 'like', "%{$query}%")->orWhere('email', 'like', "%{$query}%")->get();
+        return User::where('name', 'like', "%{$query}%")->get();
 
     }
 }
