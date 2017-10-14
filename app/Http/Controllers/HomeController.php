@@ -36,7 +36,8 @@ class HomeController extends Controller
 
         return view('home', [
             'users' => User::get()->all(),
-            'chats' => ($pc->merge($gc))->sortBy('created_at')
+            'chats' => ($pc->merge($gc))->sortBy('created_at'),
+            'chat_details' => null
         ]);
     }
 

@@ -2,9 +2,12 @@
 
 namespace App;
 
+use App\Search\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model {
+
+	use Searchable;
 
 	/**
  	* Fields that are mass assignable

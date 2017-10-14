@@ -63,7 +63,8 @@ class ChatController extends Controller {
 	    		'user' => Auth::user(),
 	    		'receiver' => User::find($receiver_id),
 	    		'chats' => ($pchat->merge($gchat))->sortBy('created_at'),
-	    		'chat_details' => $chat
+	    		'chat_details' => $chat,
+                'type' => 'nosearch'
 	    	]);
 	    }else {
 	    	$gc = GroupChat::find($chat->c_id);
@@ -73,7 +74,8 @@ class ChatController extends Controller {
 	    			'user' => Auth::user(),
 	    			'receiver' => $gc,
 	    			'chats' => Chat::whereIn('c_id',PersonalChat::where('user_id_1',Auth::user()->id)->orWhere('user_id_2',Auth::user()->id)->pluck('id')->toArray())->get(),
-	    			'chat_details' => $chat
+	    			'chat_details' => $chat,
+                    'type' => 'nosearch'
 	    		]);
 	    	}
 	    }

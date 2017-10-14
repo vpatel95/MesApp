@@ -2,13 +2,11 @@
 
 @section('nav-heading', $receiver->name)
 
-@section('action', route('search.message'))
-
 @section('chat-list')
     <div class="sidebar" data-background-color="black" data-active-color="danger">
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="{{ route('home') }}" class="simple-text">
+                <a href="{{ route('chat',['id' => $id]) }}" class="simple-text">
                     <i class="ti-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
                 </a>
             </div>
@@ -86,26 +84,6 @@
             @endforeach
         </div>
     </div>
-    <footer class="footer">
-    <div class="container-fluid">
-        <form method="POST" id="message_form">
-            {{ csrf_field() }}
-            <div class="row" style="padding: 10px">
-                <div class="col-sm-11 col-xs-10">
-                    <div class="form-group">
-                        <input class="form-control border-input" type="text" id="message" name="message">
-                    </div>
-                </div>
-                <div class="col-sm-1 col-xs-2">
-                    <input type="hidden" id="chat_id" name="chat_id" value="{{ $chat_details->id }}">
-                    <input type="hidden" id="chat_type" name="chat_type" value="{{ $chat_details->type }}">
-                    <input type="hidden" id="chat_ind_id" name="chat_ind_id" value="{{ $chat_details->c_id }}">
-                    <button type="submit" class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
-                </div>
-            </div>
-        </form>   
-    </div>
-</footer>
 @endsection
 
 @push('styles')
@@ -125,7 +103,8 @@
     <script src="{{ asset('js/paper-dashboard.js') }}"></script>
 
     <script type="text/javascript">
-        $('#search_form').submit(function(e) {
+        $('#search_form').submit(function(event) {
+            event.preventDefault();
             $.ajax({
                 type : 'POST',
                 url : '{{ route('search.message') }}',
@@ -135,35 +114,11 @@
                 data : {
                     query : $('#search').val(),
                     chat_id_search : $('#chat_id_search').val(),
+                },
+                success : function(res) {
+                    console.log(res);
                 }
             });
         });
-        $('#message_form').submit(function(event) {
-            event.preventDefault();
-            $.ajax({
-                type : 'POST',
-                url : '{{ route('send.message') }}',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data : {
-                    message : $('#message').val(),
-                    chat_id :  $('#chat_id').val()
-                },
-                success : function(res) {
-                    $('#message').val('');
-                }
-            });
-        })
-        Echo.private('chat.' + {{ $chat_details->id }})
-            .listen('MessageSent', (e) => {
-                if(e.user == {{ Auth::user()->id }}) {
-                    $('#chat_content').append('<div class="row"><div class="col-sm-8 right"><div class="card"><div class="content"><div class="footer"><div class="stats">{{ Auth::user()->name }}</div><hr /></div><div class="row"><div class="col-xs-12"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>');
-                    $('.main-panel').scrollTop($('.main-panel')[0].scrollHeight);
-                } else {
-                    $('#chat_content').append('<div class="row"><div class="col-sm-8 left"><div class="card"><div class="content"><div class="footer"><div class="stats">' + e.name +'</div><hr /></div><div class="row"><div class="col-xs-12"><div><p>' + e.message +'</p></div></div></div></div></div></div></div>');
-                    $('.main-panel').scrollTop($('.main-panel')[0].scrollHeight);
-                }
-            });
     </script>
 @endpush

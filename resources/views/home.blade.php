@@ -2,6 +2,8 @@
 
 @section('nav-heading', 'Welcome to MesApp')
 
+@section('action', route('search.user'))
+
 @section('chat-list')
     <div class="sidebar" data-background-color="black" data-active-color="danger">
     
@@ -81,6 +83,22 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
+    <script type="text/javascript">
+        $('#search_form').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type : 'POST',
+                url : '{{ route('search.user') }}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data : {
+                    query : $('#search').val(),
+                    chat_id_search : $('#chat_id_search').val(),
+                }
+            });
+        });
+    </script>
 @endpush
 
 @push('scripts')

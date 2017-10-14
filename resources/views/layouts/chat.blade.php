@@ -32,6 +32,20 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+                                <form class="navbar-form" id="search_form" method="POST" action="@yield('action')">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="text" style="border: 2px solid #333;padding: 18px 10px;border-radius: 8px;color:#333;" class="form-control border-input" placeholder="Search" name="query" id="search" value="{{ request('query') }}">
+                                        @if($chat_details)
+                                            <input type="hidden" name="chat_id_search" value="{{ $chat_details->id }}" id="chat_id_search">
+                                        @else
+                                            <input type="hidden" name="chat_id_search" value="0" id="chat_id_search">
+                                        @endif
+                                        <button type="submit" class="btn" style="margin: 0px"><i class="ti-search"></i></button>
+                                    </div>
+                                </form>
+                            </li>
+                            <li>
                                 <a href="{{ route('home') }}" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-home"></i>
                                     <p>Home</p>

@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Message\MessageRepository;
+use App\Users\UserRepository;
+use App\Users\DatabaseUserRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Message\DatabaseMessageRepository;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
     /**
      * Bootstrap any application services.
      *
@@ -21,8 +24,15 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
+    public function register() {
+
+        $this->app->bind(MessageRepository::class, function() {
+            return new DatabaseMessageRepository();
+        });
+
+        $this->app->bind(UserRepository::class, function() {
+            return new DatabaseUserRepository();
+        });
+        
     }
 }

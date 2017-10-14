@@ -1,5 +1,7 @@
 <?php
 
+use App\Message\MessageRepository;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +52,16 @@ Route::post('create/group', [
 Route::get('warning', function() {
 	return view('warning');
 })->name('warning');
+
+Route::post('search/message', [
+	'uses' => 'SearchController@searchMessage',
+	'as' => 'search.message'
+]);
+
+Route::post('search/user', [
+	'uses' => 'SearchController@searchUser',
+	'as' => 'search.user'
+]);
 
 Route::get('ai', [
 	'uses' => 'DownloadController@ai',
