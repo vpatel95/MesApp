@@ -3,10 +3,14 @@
 namespace App\Providers;
 
 use App\Message\MessageRepository;
+use App\Message\DatabaseMessageRepository;
+use App\Message\ElasticsearchMessageRepository;
 use App\Users\UserRepository;
 use App\Users\DatabaseUserRepository;
+use App\Users\ElasticsearchUserRepository;
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 use Illuminate\Support\ServiceProvider;
-use App\Message\DatabaseMessageRepository;
 
 class AppServiceProvider extends ServiceProvider {
     /**
@@ -26,12 +30,12 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function register() {
 
-        $this->app->bind(MessageRepository::class, function() {
-            return new DatabaseMessageRepository();
-        });
+        $this->app->bind(MessageRepository::class, ElasticsearchMessageRepository::class);
 
-        $this->app->bind(UserRepository::class, function() {
-            return new DatabaseUserRepository();
+        $this->app->bind(UserRepository::class, ElasticsearchUserRepository::class);
+
+        $this->app->bind(Client::class, function () {
+            return ClientBuilder::create()->setHosts(config('services.search.hosts'))->build();
         });
         
     }

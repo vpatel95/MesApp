@@ -53,14 +53,9 @@ Route::get('warning', function() {
 	return view('warning');
 })->name('warning');
 
-Route::post('search/message', [
-	'uses' => 'SearchController@searchMessage',
-	'as' => 'search.message'
-]);
-
-Route::post('search/user', [
-	'uses' => 'SearchController@searchUser',
-	'as' => 'search.user'
+Route::post('search', [
+	'uses' => 'SearchController@search',
+	'as' => 'search'
 ]);
 
 Route::get('ai', [

@@ -2,8 +2,6 @@
 
 @section('nav-heading', $receiver->name)
 
-@section('action', route('search.message'))
-
 @section('chat-list')
     <div class="sidebar" data-background-color="black" data-active-color="danger">
         <div class="sidebar-wrapper">
@@ -125,19 +123,6 @@
     <script src="{{ asset('js/paper-dashboard.js') }}"></script>
 
     <script type="text/javascript">
-        $('#search_form').submit(function(e) {
-            $.ajax({
-                type : 'POST',
-                url : '{{ route('search.message') }}',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data : {
-                    query : $('#search').val(),
-                    chat_id_search : $('#chat_id_search').val(),
-                }
-            });
-        });
         $('#message_form').submit(function(event) {
             event.preventDefault();
             $.ajax({

@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface MessageRepository {
 
-    public function search(string $query = "", int $chat_id_search): Collection;
+    public function search(string $query = ""): Collection;
 
 }

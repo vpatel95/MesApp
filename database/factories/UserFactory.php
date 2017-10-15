@@ -35,7 +35,6 @@ $factory->define(App\PersonalChat::class, function (Faker $faker) {
 });
 
 $factory->define(App\GroupChat::class, function (Faker $faker) {
-    static $password;
 
     return [
         'name' => $faker->name,
@@ -43,7 +42,6 @@ $factory->define(App\GroupChat::class, function (Faker $faker) {
 });
 
 $factory->define(App\GroupMember::class, function (Faker $faker) {
-    static $password;
 
     return [
         'group_chat_id' => $faker->numberBetween($min=1, $max=10),
@@ -55,20 +53,17 @@ $factory->define(App\Chat::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'type' => $faker->unique()->safeEmail,
+        'c_id' => 'personal'
     ];
 });
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Message::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'chat_id' => $faker->unique()->safeEmail,
+        'user_id' => 
+        'message' => $faker->sentence($nbWords = 6, $variableNbWords = true)
     ];
 });

@@ -22,47 +22,49 @@
         <div class="main-panel">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span>Chats</span>
-                        </button>
-                        <a class="navbar-brand" href="#">@yield('nav-heading')</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <form class="navbar-form" id="search_form" method="POST" action="@yield('action')">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">@yield('nav-heading')</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-5" id="search_bar">
+                            <div class="navbar-header">
+                                <form class="navbar-form" id="search_form" method="POST" action="{{ route('search') }}">
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <input type="text" style="border: 2px solid #333;padding: 18px 10px;border-radius: 8px;color:#333;" class="form-control border-input" placeholder="Search" name="query" id="search" value="{{ request('query') }}">
-                                        @if($chat_details)
-                                            <input type="hidden" name="chat_id_search" value="{{ $chat_details->id }}" id="chat_id_search">
-                                        @else
-                                            <input type="hidden" name="chat_id_search" value="0" id="chat_id_search">
-                                        @endif
                                         <button type="submit" class="btn" style="margin: 0px"><i class="ti-search"></i></button>
                                     </div>
                                 </form>
-                            </li>
-                            <li>
-                                <a href="{{ route('home') }}" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-home"></i>
-                                    <p>Home</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    <i class="ti-close"></i>
-                                    <p>Logout</p>
-                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="navbar-toggle">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span>Chats</span>
+                                </button>
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <a href="{{ route('home') }}" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="ti-home"></i>
+                                            <p>Home</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                            <i class="ti-close"></i>
+                                            <p>Logout</p>
+                                        </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -74,6 +76,21 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+        $('#search_form').submit(function(event) {
+            e.preventDefault(event);
+            $.ajax({
+                type : 'POST',
+                url : '{{ route('search') }}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data : {
+                    query : $('#search').val(),
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             if($(window).width()<768){

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DatabaseMessageRepository implements MessageRepository {
 
-    public function search(string $query = "", int $chat_id_search): Collection {
+    public function search(string $query = ""): Collection {
 
-        return Message::where('message', 'like', "%{$query}%")->where('chat_id',$chat_id_search)->get();
+        return Message::where('message', 'like', "%{$query}%")->get();
 
     }
 }
