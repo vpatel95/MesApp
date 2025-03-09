@@ -5,12 +5,12 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": "^7.4",
         "babenkoivan/scout-elasticsearch-driver": "^2.2",
         "elasticsearch/elasticsearch": "^5.3",
-        "fideloper/proxy": "~3.3",
+        "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.7",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "^5.6",
         "laravel/tinker": "~1.0",
         "pusher/pusher-php-server": "^3.0"
     },
@@ -54,6 +54,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
