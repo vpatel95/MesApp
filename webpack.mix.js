@@ -1,4 +1,8 @@
 let mix = require('laravel-mix');
+let webpack = require('webpack');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 /*
  |--------------------------------------------------------------------------
@@ -12,4 +16,14 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .webpackConfig({
+      plugins: [
+         new webpack.DefinePlugin({
+            "process.env": {
+               PUSHER_APP_KEY: JSON.stringify(process.env.PUSHER_APP_KEY),
+               PUSHER_APP_CLUSTER: JSON.stringify(process.env.PUSHER_APP_CLUSTER)
+            }
+         })
+      ]
+   });
